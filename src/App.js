@@ -1,10 +1,13 @@
-import logo from './logo.svg';
+import headerLogoPath from "../src/images/header__logo.svg"
 
 function App() {
   return (
     <div className="page">
       <header className="header">
-          <img src="<%=require('./images/header__logo.svg')%>" alt="Логотип заголовка" className="header__logo" />
+          <img 
+          src={headerLogoPath}
+          alt="Логотип заголовка" 
+          className="header__logo" />
         </header>
         <main className="content">
           <section className="profile">
@@ -16,12 +19,12 @@ function App() {
             <div className="profile__info">
               <h1 className="profile__title">Жак-Ив Кусто</h1>
               <h2 className="profile__subtitle">Исследователь океана</h2>
-              <button aria-label="Редактировать" className="profile__edit-button">
-                <img src="<%=require('./images/Vector-2.png')%>" alt="Кнопка редактирования" className="profile__pen-icon" />
+
+              <button aria-label="Редактировать" className="profile__edit-button" type="button">
               </button>
+
             </div>
-            <button aria-label="Добавить" className="profile__add-button">
-              <img src="<%=require('../../../images/Vectoradd.png')%>" alt="Значок плюса" className="profile__plus-icon" />
+            <button aria-label="Добавить" className="profile__add-button" type="button">
             </button>
           </section>
           <section aria-label="Галерея" className="elements">
