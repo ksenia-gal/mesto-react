@@ -1,0 +1,8 @@
+.element__trash-icon {
+  max-width: 18px;
+  max-height: 19px;
+  vertical-align: center;
+}
+.element__trash-icon:hover {
+  opacity: 0.5;
+}
