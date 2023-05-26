@@ -2,14 +2,14 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  z-index: 3;
+  background-image: url(../../../images/Trash.svg);
+  background-repeat: no-repeat;
+  background-color: transparent;
+  z-index: 1;
   border: none;
-  max-width: 18px;
-  max-height: 19px;
-  margin: 0;
-  padding: 0;
+  width: 18px;
+  height: 19px;
   cursor: pointer;
-  background: none;
 }
 
 .element__delete-button:hover {
