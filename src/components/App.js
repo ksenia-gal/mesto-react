@@ -11,7 +11,6 @@ import ConfirmationPopup from "./ConfirmationPopup.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 function App() {
-  const [currentUser, setCurrentUser] = React.useState({});
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
   const [isAddCardPopupOpen, setIsAddCardPopupOpen] = React.useState(false);
@@ -26,17 +25,8 @@ function App() {
     React.useState({ isOpen: false, card: {} });
   const [isSaving, setIsSaving] = React.useState(false);
 
-  // эффект получения карточек при загрузке страницы
-  React.useEffect(() => {
-    api
-      .getInitialCards()
-      .then((initialCards) => {
-        setCards(initialCards);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // создание стейта currentUser
+  const [currentUser, setCurrentUser] = React.useState({});
 
   // эффект получения данных пользователя при загрузке страницы
   React.useEffect(() => {
@@ -44,6 +34,18 @@ function App() {
       .getUserData()
       .then((data) => {
         setCurrentUser(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  // эффект получения карточек при загрузке страницы
+  React.useEffect(() => {
+    api
+      .getInitialCards()
+      .then((initialCards) => {
+        setCards(initialCards);
       })
       .catch((err) => {
         console.log(err);
@@ -149,7 +151,8 @@ function App() {
 
   // обработчик лайков карточки
   function handleCardLike(card) {
-    const isLiked = card.likes.some((user) => user._id === currentUser._id);
+    // проверка, есть ли лайк на этой карточке
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
     if (isLiked) {
       api
         .deleteLike(card._id)
@@ -171,12 +174,13 @@ function App() {
     }
   }
 
-  // обработчик удаления карточки
+  // функция удаления карточки
   function handleCardDelete(card) {
     setIsSaving(true);
     api
       .deleteCard(card._id)
       .then(() => {
+        // создание копии массива c помощью метода filter с исключением из него удаленной карточки
         const newCards = cards.filter((item) =>
           item._id === card._id ? false : true
         );

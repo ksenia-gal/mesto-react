@@ -3,8 +3,11 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 // создание компонента Card
 function Card(props) {
+  // подписка на контекст CurrentUserContext
   const currentUser = React.useContext(CurrentUserContext);
+  // проверка, является ли пользователь владельцем текущей карточки
   const isOwn = props.card.owner._id === currentUser._id;
+  // проверка, есть ли у карточки лайк, поставленный текущим пользователем
   const _likedCard = props.card.likes.some(
     (item) => item._id === currentUser._id
   );
@@ -33,14 +36,14 @@ function Card(props) {
         alt={`Фотография ${props.card.name}`}
         onClick={handleCardClick}
       />
-      {isOwn && (
+      {isOwn && 
         <button
           className="element__delete-button"
           type="button"
           aria-label="Значок корзины"
           onClick={handleDeleteClick}
         />
-      )}
+      }
       <div className="element__block">
         <p className="element__title">{props.card.name}</p>
         <div className="element__like-block">

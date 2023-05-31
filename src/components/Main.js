@@ -2,8 +2,9 @@ import React from "react";
 import Card from "./Card.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
-// создание компонента Main
+// создание функционального компонента Main
 function Main(props) {
+// подписка на контекст CurrentUserContext
   const currentUser = React.useContext(CurrentUserContext);
 
   return (

@@ -10,11 +10,12 @@ function EditProfilePopup({
   onUpdateUser,
   isRender,
 }) {
-  const currentUser = React.useContext(CurrentUserContext);
-
-  // стейты для пользователя
+  // стейт-переменные для пользователя
   const [name, setName] = React.useState("");
   const [description, setDescription] = React.useState("");
+
+  // подписка на контекст CurrentUserContext
+  const currentUser = React.useContext(CurrentUserContext);
 
   // эффект заполнения корректными данными при открытии формы редактирования профиля
   React.useEffect(() => {

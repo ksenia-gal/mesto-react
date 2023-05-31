@@ -9,6 +9,7 @@ function EDitAvatarPopup({
   isRender,
   onOverlayClose,
 }) {
+  //получаем прямой доступ к DOM-элементу инпута и его значению
   const avatarRef = React.useRef();
 
   function handleSubmit(evt) {
