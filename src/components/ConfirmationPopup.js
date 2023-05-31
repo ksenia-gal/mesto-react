@@ -16,8 +16,8 @@ function ConfirmationPopup({
 
   return (
     <PopupWithForm
-      title="Вы уверены?"
       name="confirmationForm"
+      title="Вы уверены?"
       buttonText={isRender ? "Удаление..." : "Да"}
       isOpen={isOpen}
       onClose={onClose}

@@ -1,7 +1,7 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm.js";
 
-// создание компонента EDitAvatarPopup
+// создание компонента EditAvatarPopup
 function EDitAvatarPopup({
   isOpen,
   onClose,
@@ -24,8 +24,8 @@ function EDitAvatarPopup({
 
   return (
     <PopupWithForm
-      title="Обновить аватар"
       name="avatarForm"
+      title="Обновить аватар"
       isOpen={isOpen}
       buttonText={isRender ? "Сохранение..." : "Сохранить"}
       onClose={onClose}
@@ -36,8 +36,8 @@ function EDitAvatarPopup({
         ref={avatarRef}
         id="new-avatar-input"
         type="url"
-        placeholder="Ссылка на изображение"
         className="popup__input popup__input_new-avatar"
+        placeholder="Ссылка на изображение"
         name="avatar"
         required
       />

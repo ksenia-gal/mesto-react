@@ -54,8 +54,8 @@ function EditProfilePopup({
         onChange={handleChangeName}
         id="name-input"
         type="text"
-        placeholder="Введите имя"
         className="popup__input popup__input_name"
+        placeholder="Введите имя"
         name="name"
         minLength="2"
         maxLength="40"
@@ -67,8 +67,8 @@ function EditProfilePopup({
         onChange={handleChangeDescription}
         id="information-input"
         type="text"
-        placeholder="Введите дополнительную информацию о себе"
         className="popup__input popup__input_information"
+        placeholder="Введите дополнительную информацию о себе"
         name="about"
         minLength="2"
         maxLength="200"

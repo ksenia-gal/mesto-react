@@ -46,8 +46,8 @@ function AddCardPopup({
         onChange={handleAddCardName}
         id="card-name-input"
         type="text"
-        placeholder="Введите название"
         className="popup__input popup__input_place-name"
+        placeholder="Введите название"
         name="name"
         minLength="2"
         maxLength="30"
@@ -59,8 +59,8 @@ function AddCardPopup({
         onChange={handleAddCardLink}
         id="link-input"
         type="url"
-        placeholder="Введите ссылку на изображение"
         className="popup__input popup__input_image"
+        placeholder="Введите ссылку на изображение"
         name="link"
         required
       />
