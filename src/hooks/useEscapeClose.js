@@ -4,11 +4,11 @@ import React from 'react';
 function useEscapeClose (isOpen, onClose) {
   React.useEffect(() => {
     if (!isOpen) return;
-    const handleEscapeClose = (event) => {
+    const closeByEscape = (event) => {
       if (event.key === 'Escape') onClose();
     };
-    document.addEventListener("keydown", handleEscapeClose);
-    return () => document.removeEventListener("keydown", handleEscapeClose);
+    document.addEventListener("keydown", closeByEscape);
+    return () => document.removeEventListener("keydown", closeByEscape);
   }, [isOpen, onClose]);
 }
 

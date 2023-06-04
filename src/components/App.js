@@ -5,8 +5,8 @@ import Main from "./Main.js";
 import Footer from "./Footer.js";
 import ImagePopup from "./ImagePopup.js";
 import EditProfilePopup from "./EditProfilePopup.js";
-import EditAvatarPopup from "./EditAvatarPopup.js";
 import AddCardPopup from "./AddCardPopup.js";
+import EditAvatarPopup from "./EditAvatarPopup.js";
 import ConfirmationPopup from "./ConfirmationPopup.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
