@@ -7,15 +7,14 @@ function Card(props) {
   const currentUser = React.useContext(CurrentUserContext);
   // проверка, является ли пользователь владельцем текущей карточки
   const isOwn = props.card.owner._id === currentUser._id;
-  // проверка, есть ли у карточки лайк, поставленный текущим пользователем
+  // проверка, есть ли у карточки лайк текущего пользователя
   const _likedCard = props.card.likes.some(
     (item) => item._id === currentUser._id
   );
   const cardLikeButton = `element__like-button ${
     _likedCard ? "element__like-button_active" : ""
   }`;
-
-  // обработчики
+  
   function handleCardClick() {
     props.onCardClick(props.card);
   }

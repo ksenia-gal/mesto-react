@@ -4,7 +4,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 // создание функционального компонента Main
 function Main(props) {
-// подписка на контекст CurrentUserContext
+// подписка на контекст
   const currentUser = React.useContext(CurrentUserContext);
 
   return (

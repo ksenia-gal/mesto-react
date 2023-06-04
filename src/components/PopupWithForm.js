@@ -12,7 +12,7 @@ function PopupWithForm({
   onSubmit,
   onOverlayClose,
 }) {
-  // Закрытие по Esc
+  // Закрытие по кнопке Escape
   useEscapeClose(isOpen, onClose);
 
   return (

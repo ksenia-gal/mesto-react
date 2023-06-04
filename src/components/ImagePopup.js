@@ -10,7 +10,7 @@ function ImagePopup({
     element: { name, link },
   },
 }) {
-  // закрытие по Esc ---
+  // закрытие по Escape
   useEscapeClose(isOpen, onClose);
 
   return (

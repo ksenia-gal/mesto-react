@@ -25,7 +25,7 @@ function AddCardPopup({
     onAddPlace({ name, link });
   }
 
-  // эффект для очистки инпутов
+  // эффект очистки инпутов
   React.useEffect(() => {
     setName("");
     setLink("");

@@ -8,7 +8,7 @@ function EditProfilePopup({
   onClose,
   onOverlayClose,
   onUpdateUser,
-  isRender,
+  isRender
 }) {
   // стейт-переменные для пользователя
   const [name, setName] = React.useState("");

@@ -59,7 +59,7 @@ class Api {
     return this._checkResponse(response);
   }
 
-  // постановка и удаление лайка
+  // постановка лайка
   async putLike(cardId) {
     const response = await fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
@@ -67,6 +67,8 @@ class Api {
     });
     return this._checkResponse(response);
   }
+
+  // удаление лайка
   async deleteLike(cardId) {
     const response = await fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
@@ -74,6 +76,7 @@ class Api {
     });
     return this._checkResponse(response);
   }
+
   // удаление карточки
   async deleteCard(cardId) {
     const response = await fetch(`${this._baseUrl}/cards/${cardId}`, {

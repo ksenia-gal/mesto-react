@@ -17,7 +17,7 @@ function EDitAvatarPopup({
     onUpdateAvatar(avatarRef.current.value);
   }
 
-  // эффект для очистки формы
+  // эффект очистки формы
   React.useEffect(() => {
     avatarRef.current.value = "";
   }, [isOpen]);

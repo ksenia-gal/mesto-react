@@ -4,10 +4,10 @@ import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
 import ImagePopup from "./ImagePopup.js";
+import ConfirmationPopup from "./ConfirmationPopup.js";
 import EditProfilePopup from "./EditProfilePopup.js";
 import AddCardPopup from "./AddCardPopup.js";
 import EditAvatarPopup from "./EditAvatarPopup.js";
-import ConfirmationPopup from "./ConfirmationPopup.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 function App() {
