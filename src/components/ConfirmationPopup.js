@@ -23,7 +23,7 @@ function ConfirmationPopup({
       onClose={onClose}
       onOverlayClose={onOverlayClose}
       onSubmit={handleSubmit}
-    ></PopupWithForm>
+    />
   );
 }
 

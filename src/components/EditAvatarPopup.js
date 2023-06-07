@@ -2,7 +2,7 @@ import React from "react";
 import PopupWithForm from "./PopupWithForm.js";
 
 // создание компонента EditAvatarPopup
-function EDitAvatarPopup({
+function EditAvatarPopup({
   isOpen,
   onClose,
   onUpdateAvatar,
@@ -29,7 +29,7 @@ function EDitAvatarPopup({
       isOpen={isOpen}
       buttonText={isRender ? "Сохранение..." : "Сохранить"}
       onClose={onClose}
-      onOverlayClose={onOverlayClose}
+      // onOverlayClose={onOverlayClose}
       onSubmit={handleSubmit}
     >
       <input
@@ -49,4 +49,4 @@ function EDitAvatarPopup({
   );
 }
 
-export default EDitAvatarPopup;
+export default EditAvatarPopup;

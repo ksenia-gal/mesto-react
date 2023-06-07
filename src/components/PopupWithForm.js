@@ -1,5 +1,6 @@
 import React from "react";
-import useEscapeClose from "../hooks/useEscapeClose.js";
+// import useEscapeClose from "../hooks/useEscapeClose.js";
+import usePopupClose from "../hooks/usePopupClose";
 
 // создание компонента PopupWithForm
 function PopupWithForm({
@@ -10,23 +11,16 @@ function PopupWithForm({
   onClose,
   children,
   onSubmit,
-  onOverlayClose,
 }) {
-  // Закрытие по кнопке Escape
-  useEscapeClose(isOpen, onClose);
+  // Закрытие по кнопке Escape и оверлей
+  usePopupClose(isOpen, onClose);
 
   return (
     <div
       className={`popup popup_type_${name} ${isOpen ? "popup_opened" : false}`}
-      onClick={onOverlayClose}
     >
       <div className="popup__overlay">
-        <form
-          className="form popup__container"
-          name={name}
-          noValidate
-          onSubmit={onSubmit}
-        >
+        <form className="form popup__container" name={name} onSubmit={onSubmit}>
           <h2 className="popup__title">{title}</h2>
           <>{children}</>
           <button
@@ -40,7 +34,7 @@ function PopupWithForm({
             className="popup__close-button"
             type="button"
             aria-label="Закрыть форму"
-          ></button>
+          />
         </form>
       </div>
     </div>

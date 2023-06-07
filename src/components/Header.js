@@ -13,8 +13,4 @@ function Header() {
   );
 }
 
-<header className="header">
-  <img src={headerLogoPath} alt="Логотип заголовка" className="header__logo" />
-</header>;
-
 export default Header;

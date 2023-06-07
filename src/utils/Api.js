@@ -15,17 +15,18 @@ class Api {
     }
   }
 
+  _request(url, options) {
+    return fetch(url, options).then(this._checkResponse);
+  }
+
   // загрузка информации о пользователе с сервера
   async getUserData() {
-    const res = await fetch(this._userUrl, {
+    const response = await fetch(this._userUrl, {
       headers: {
         authorization: this._token,
       },
     });
-    if (res.ok) {
-      return res.json();
-    }
-    return await Promise.reject(`Ошибка: ${res.status}`);
+    return this._checkResponse(response);
   }
 
   // загрузка карточек с сервера

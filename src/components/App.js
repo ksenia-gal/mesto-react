@@ -93,61 +93,44 @@ function App() {
     });
   }
 
-  // обработчик закрытия попапа по оверлею
-  function handleOverlayClickClose(evt) {
-    if (evt.target.classList.contains("popup__overlay")) closeAllPopups();
+
+  // универсальная функцию, принимающая функцию запроса
+  function handleSubmit(request) {
+    // измененние текста кнопки до вызова запроса
+    setIsSaving(true);
+    request()
+      // закрытие попапа только в `then`
+      .then(closeAllPopups)
+      .catch(console.error)
+      // возвращение исходного текста кнопки
+      .finally(() => setIsSaving(false));
   }
 
   // обработчик изменения данных пользователя
   function handleUpdateUserData(newUserData) {
-    setIsSaving(true);
-    api
-      .editProfile(newUserData)
-      .then((data) => {
-        setCurrentUser(data);
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsSaving(false);
-      });
+    function makeRequest() {
+      return api.editProfile(newUserData).then(setCurrentUser);
+    }
+    handleSubmit(makeRequest);
   }
 
   // обработчик изменения аватара
   function handleUpdateAvatar(newAvatarLink) {
-    setIsSaving(true);
-    api
-      .changeAvatar(newAvatarLink)
-      .then((data) => {
-        setCurrentUser({ ...currentUser, avatar: data.avatar });
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsSaving(false);
-      });
+    function makeRequest() {
+      return api.changeAvatar(newAvatarLink).then(setCurrentUser);
+    }
+    handleSubmit(makeRequest);
   }
 
   // обработчик добавления карточки
   function handleAddCardSubmit(cardData) {
-    setIsSaving(true);
-    api
-      .addNewCard(cardData)
+    function makeRequest() {
+      return api.addNewCard(cardData)
       .then((newCard) => {
-        setCards([newCard, ...cards]);
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsSaving(false);
-      });
-  }
+        setCards([newCard, ...cards])});
+  } 
+  handleSubmit(makeRequest);
+} 
 
   // обработчик лайков карточки
   function handleCardLike(card) {
@@ -170,30 +153,24 @@ function App() {
             state.map((item) => (item._id === card._id ? newCard : item))
           )
         )
-        .catch((error) => console.log(`Ошибка: ${error}`));
+        .catch(console.error);
     }
   }
 
   // функция удаления карточки
   function handleCardDelete(card) {
-    setIsSaving(true);
-    api
-      .deleteCard(card._id)
+    function makeRequest() {
+      return api.deleteCard(card._id)
       .then(() => {
         // создание копии массива c помощью метода filter с исключением из него удаленной карточки
         const newCards = cards.filter((item) =>
           item._id === card._id ? false : true
         );
         setCards(newCards);
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsSaving(false);
       });
-  }
+    }
+  handleSubmit(makeRequest);
+}
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -213,33 +190,28 @@ function App() {
           <ImagePopup
             card={selectedCard}
             onClose={closeAllPopups}
-            onOverlayClose={handleOverlayClickClose}
           />
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
-            onOverlayClose={handleOverlayClickClose}
             onUpdateUser={handleUpdateUserData}
             isRender={isSaving}
           />
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
-            onOverlayClose={handleOverlayClickClose}
             onUpdateAvatar={handleUpdateAvatar}
             isRender={isSaving}
           />
           <AddCardPopup
             isOpen={isAddCardPopupOpen}
             onClose={closeAllPopups}
-            onOverlayClose={handleOverlayClickClose}
             onAddPlace={handleAddCardSubmit}
             isRender={isSaving}
           />
           <ConfirmationPopup
             deleteCard={selectedCardDeleteConfirmation}
             onClose={closeAllPopups}
-            onOverlayClose={handleOverlayClickClose}
             onDeleteCard={handleCardDelete}
             isRender={isSaving}
           />

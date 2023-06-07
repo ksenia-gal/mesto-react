@@ -7,7 +7,7 @@ function AddCardPopup({
   onClose,
   onOverlayClose,
   onAddPlace,
-  isRender,
+  isRender
 }) {
   const [name, setName] = React.useState("");
   const [link, setLink] = React.useState("");
