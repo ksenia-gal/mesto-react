@@ -15,31 +15,31 @@ class Api {
     }
   }
 
-  _request(url, options) {
+  // универсальный метод запроса с проверкой ответа
+  _request(endpoint, options) {
+    const url = `${this._baseUrl}/${endpoint}`;
     return fetch(url, options).then(this._checkResponse);
   }
 
   // загрузка информации о пользователе с сервера
   async getUserData() {
-    const response = await fetch(this._userUrl, {
+    const response = await this._request("users/me", {
       headers: {
         authorization: this._token,
       },
     });
-    return this._checkResponse(response);
+    return response;
   }
 
   // загрузка карточек с сервера
   async getInitialCards() {
-    const response = await fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers,
-    });
-    return this._checkResponse(response);
+    const response = await this._request("cards", { headers: this._headers });
+    return response;
   }
 
   // редактирование профиля
   async editProfile(profileData) {
-    const response = await fetch(`${this._baseUrl}/users/me`, {
+    const response = await this._request("users/me", {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -47,49 +47,48 @@ class Api {
         about: profileData.about,
       }),
     });
-    return this._checkResponse(response);
+    return response;
   }
-
   // добавление новой карточки
   async addNewCard(cardData) {
-    const response = await fetch(`${this._baseUrl}/cards`, {
+    const response = await this._request("cards", {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify(cardData),
     });
-    return this._checkResponse(response);
+    return response;
   }
 
   // постановка лайка
   async putLike(cardId) {
-    const response = await fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+    const response = await this._request(`cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
     });
-    return this._checkResponse(response);
+    return response;
   }
 
   // удаление лайка
   async deleteLike(cardId) {
-    const response = await fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+    const response = await this._request(`cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
     });
-    return this._checkResponse(response);
+    return response;
   }
 
   // удаление карточки
   async deleteCard(cardId) {
-    const response = await fetch(`${this._baseUrl}/cards/${cardId}`, {
+    const response = await this._request(`cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
     });
-    return this._checkResponse(response);
+    return response;
   }
 
   // обновление аватара пользователя
   async changeAvatar(src) {
-    const response = await fetch(`${this._userUrl}/avatar`, {
+    const response = await this._request(`users/me/avatar`, {
       method: "PATCH",
       headers: {
         authorization: this._token,
@@ -99,7 +98,7 @@ class Api {
         avatar: src,
       }),
     });
-    return this._checkResponse(response);
+    return response;
   }
 }
 
