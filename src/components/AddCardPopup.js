@@ -1,35 +1,21 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm.js";
+import useForm from "../hooks/useForm.js";
 
 // создание компонента AddCardPopup
 function AddCardPopup({
   isOpen,
   onClose,
-  onOverlayClose,
   onAddPlace,
   isRender
 }) {
-  const [name, setName] = React.useState("");
-  const [link, setLink] = React.useState("");
-
-  function handleAddCardName(evt) {
-    setName(evt.target.value);
-  }
-
-  function handleAddCardLink(evt) {
-    setLink(evt.target.value);
-  }
+  const { values, handleChange, setValues } = useForm({ name: "", link: "" });
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    onAddPlace({ name, link });
+    onAddPlace(values);
+    setValues({ name: "", link: "" });
   }
-
-  // эффект очистки инпутов
-  React.useEffect(() => {
-    setName("");
-    setLink("");
-  }, [isOpen]);
 
   return (
     <PopupWithForm
@@ -38,12 +24,11 @@ function AddCardPopup({
       isOpen={isOpen}
       buttonText={isRender ? "Сохранение..." : "Создать"}
       onClose={onClose}
-      onOverlayClose={onOverlayClose}
       onSubmit={handleSubmit}
     >
       <input
-        value={name}
-        onChange={handleAddCardName}
+        value={values.name}
+        onChange={handleChange}
         id="card-name-input"
         type="text"
         className="popup__input popup__input_place-name"
@@ -55,8 +40,8 @@ function AddCardPopup({
       />
       <span id="card-name-input-error" className="popup__input-error"></span>
       <input
-        value={link}
-        onChange={handleAddCardLink}
+        value={values.link}
+        onChange={handleChange}
         id="link-input"
         type="url"
         className="popup__input popup__input_image"

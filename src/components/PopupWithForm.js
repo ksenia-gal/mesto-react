@@ -1,5 +1,4 @@
 import React from "react";
-// import useEscapeClose from "../hooks/useEscapeClose.js";
 import usePopupClose from "../hooks/usePopupClose";
 
 // создание компонента PopupWithForm

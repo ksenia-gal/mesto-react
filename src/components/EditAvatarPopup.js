@@ -1,26 +1,20 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm.js";
+import useForm from "../hooks/useForm.js";
 
 // создание компонента EditAvatarPopup
-function EditAvatarPopup({
-  isOpen,
-  onClose,
-  onUpdateAvatar,
-  isRender,
-  onOverlayClose,
-}) {
-  //получаем прямой доступ к DOM-элементу инпута и его значению
-  const avatarRef = React.useRef();
+function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isRender }) {
+  const { values, handleChange, setValues } = useForm();
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    onUpdateAvatar(avatarRef.current.value);
+    onUpdateAvatar(values.avatar);
   }
 
   // эффект очистки формы
   React.useEffect(() => {
-    avatarRef.current.value = "";
-  }, [isOpen]);
+    setValues({ avatar: "" });
+  }, [isOpen, setValues]);
 
   return (
     <PopupWithForm
@@ -29,11 +23,11 @@ function EditAvatarPopup({
       isOpen={isOpen}
       buttonText={isRender ? "Сохранение..." : "Сохранить"}
       onClose={onClose}
-      // onOverlayClose={onOverlayClose}
       onSubmit={handleSubmit}
     >
       <input
-        ref={avatarRef}
+        value={values.avatar || ""}
+        onChange={handleChange}
         id="new-avatar-input"
         type="url"
         className="popup__input popup__input_new-avatar"

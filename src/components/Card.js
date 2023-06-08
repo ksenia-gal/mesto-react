@@ -14,7 +14,7 @@ function Card(props) {
   const cardLikeButton = `element__like-button ${
     _likedCard ? "element__like-button_active" : ""
   }`;
-  
+
   function handleCardClick() {
     props.onCardClick(props.card);
   }
@@ -35,14 +35,14 @@ function Card(props) {
         alt={`Фотография ${props.card.name}`}
         onClick={handleCardClick}
       />
-      {isOwn && 
+      {isOwn && (
         <button
           className="element__delete-button"
           type="button"
           aria-label="Значок корзины"
           onClick={handleDeleteClick}
         />
-      }
+      )}
       <div className="element__block">
         <p className="element__title">{props.card.name}</p>
         <div className="element__like-block">

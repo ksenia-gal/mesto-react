@@ -1,41 +1,24 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
+import useForm from "../hooks/useForm.js";
 
 // создание компонента EditProfilePopup
-function EditProfilePopup({
-  isOpen,
-  onClose,
-  onOverlayClose,
-  onUpdateUser,
-  isRender
-}) {
-  // стейт-переменные для пользователя
-  const [name, setName] = React.useState("");
-  const [description, setDescription] = React.useState("");
-
+function EditProfilePopup({ isOpen, onClose, onUpdateUser, isRender }) {
   // подписка на контекст CurrentUserContext
   const currentUser = React.useContext(CurrentUserContext);
 
-  // эффект заполнения корректными данными при открытии формы редактирования профиля
-  React.useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
-  }, [currentUser, isOpen]);
-
-  function handleChangeName(evt) {
-    setName(evt.target.value);
-  }
-
-  function handleChangeDescription(evt) {
-    setDescription(evt.target.value);
-  }
+  // использование кастомного хука useForm для контроля инпутов
+  const { values, handleChange, setValues } = useForm({
+    name: currentUser.name,
+    description: currentUser.about,
+  });
 
   function handleSubmit(evt) {
     evt.preventDefault();
     onUpdateUser({
-      name: name,
-      about: description,
+      name: values.name,
+      about: values.description,
     });
   }
 
@@ -46,12 +29,11 @@ function EditProfilePopup({
       isOpen={isOpen}
       buttonText={isRender ? "Сохранение..." : "Сохранить"}
       onClose={onClose}
-      onOverlayClose={onOverlayClose}
       onSubmit={handleSubmit}
     >
       <input
-        value={name || ""}
-        onChange={handleChangeName}
+        value={values.name || ""}
+        onChange={handleChange}
         id="name-input"
         type="text"
         className="popup__input popup__input_name"
@@ -63,13 +45,13 @@ function EditProfilePopup({
       />
       <span id="name-input-error" className="popup__input-error"></span>
       <input
-        value={description || ""}
-        onChange={handleChangeDescription}
+        value={values.description || ""}
+        onChange={handleChange}
         id="information-input"
         type="text"
         className="popup__input popup__input_information"
         placeholder="Введите дополнительную информацию о себе"
-        name="about"
+        name="description"
         minLength="2"
         maxLength="200"
         required

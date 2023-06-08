@@ -93,7 +93,6 @@ function App() {
     });
   }
 
-
   // универсальная функцию, принимающая функцию запроса
   function handleSubmit(request) {
     // измененние текста кнопки до вызова запроса
@@ -125,12 +124,12 @@ function App() {
   // обработчик добавления карточки
   function handleAddCardSubmit(cardData) {
     function makeRequest() {
-      return api.addNewCard(cardData)
-      .then((newCard) => {
-        setCards([newCard, ...cards])});
-  } 
-  handleSubmit(makeRequest);
-} 
+      return api.addNewCard(cardData).then((newCard) => {
+        setCards([newCard, ...cards]);
+      });
+    }
+    handleSubmit(makeRequest);
+  }
 
   // обработчик лайков карточки
   function handleCardLike(card) {
@@ -160,8 +159,7 @@ function App() {
   // функция удаления карточки
   function handleCardDelete(card) {
     function makeRequest() {
-      return api.deleteCard(card._id)
-      .then(() => {
+      return api.deleteCard(card._id).then(() => {
         // создание копии массива c помощью метода filter с исключением из него удаленной карточки
         const newCards = cards.filter((item) =>
           item._id === card._id ? false : true
@@ -169,8 +167,8 @@ function App() {
         setCards(newCards);
       });
     }
-  handleSubmit(makeRequest);
-}
+    handleSubmit(makeRequest);
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -187,10 +185,7 @@ function App() {
             onDeletePlace={handleDeleteCardClick}
           />
           <Footer />
-          <ImagePopup
-            card={selectedCard}
-            onClose={closeAllPopups}
-          />
+          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
