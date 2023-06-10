@@ -3,19 +3,17 @@ import PopupWithForm from "./PopupWithForm.js";
 import useForm from "../hooks/useForm.js";
 
 // создание компонента AddCardPopup
-function AddCardPopup({
-  isOpen,
-  onClose,
-  onAddPlace,
-  isRender
-}) {
+function AddCardPopup({ isOpen, onClose, onAddPlace, isRender }) {
   const { values, handleChange, setValues } = useForm({ name: "", link: "" });
 
   function handleSubmit(evt) {
     evt.preventDefault();
     onAddPlace(values);
-    setValues({ name: "", link: "" });
   }
+
+  React.useEffect(() => {
+    setValues({ name: "", link: "" });
+  }, [isOpen]);
 
   return (
     <PopupWithForm

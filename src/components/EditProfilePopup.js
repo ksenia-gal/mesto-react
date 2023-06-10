@@ -8,11 +8,18 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isRender }) {
   // подписка на контекст CurrentUserContext
   const currentUser = React.useContext(CurrentUserContext);
 
-  // использование кастомного хука useForm для контроля инпутов
   const { values, handleChange, setValues } = useForm({
-    name: currentUser.name,
-    description: currentUser.about,
+    name: "",
+    description: "",
   });
+
+  // эффект заполнения корректными данными при открытии формы редактирования профиля
+  React.useEffect(() => {
+    setValues({
+      name: currentUser.name,
+      description: currentUser.about,
+    });
+  }, [currentUser, isOpen]);
 
   function handleSubmit(evt) {
     evt.preventDefault();
